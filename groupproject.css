@@ -3,6 +3,16 @@
     width: 100%;
     background-color: rgb(221, 84, 49);
 font-family: cursive;}
+
+.header-footer {text-align: center;
+    color:skyblue;
+width: 100%;
+background-color: violet;}
+
+    .footer {text-align: center; 
+        position: fixed;
+    bottom: 0;}
+
     
     #main-nav {text-align: center;
         background-color: rgba(233, 118, 118, 0.913);
@@ -63,5 +73,64 @@ font-family: cursive;}
             border: 2px solid black;
             border-radius: 15px;
             margin-right: 10px;
+      }
+
+      .Match_Calculator_box {text-align: center;
+        background-color:  rgb(212, 154, 84);
+        color: blanchedalmond;
+        width: 30%;
+        height: 30%;
+        padding: 10px;
+        float:right;
+        border: 2px solid black;
+        border-radius: 15px;
+        margin-right: 10px;
+  }
+
+      
+      .Match_Predictor_box {
+        text-align: center;
+            background-color: rgb(212, 154, 84);
+            color: blanchedalmond;
+            width: 30%;
+            height: 30%;
+            padding: 10px;
+            float:right;
+            border: 2px solid black;
+            border-radius: 15px;
+            margin-right: 10px;
+      }
+
+      .search_box { 
+        margin: 20px auto;
+        width: 100%;
+        max-width: 150px;
+        height: 40px; 
+        text-align: center; 
+      }
+
+      .issues_login_box
+      { margin: 20px auto;
+        width: 100%;
+        max-width: 150px;
+        height: 40px; 
+        text-align: center; 
+
+      }
+      
+      .Report_box { 
+        margin: 20px auto;
+        width: 100%;
+        max-width: 150px;
+        height: 40px; 
+        text-align: center; 
+      }
+
+      .Question_Answer_box { 
+        margin: 20px auto;
+        width: 100%;
+        max-width: 150px;
+        height: 40px; 
+        text-align: center; 
       }
     
