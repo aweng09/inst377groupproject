@@ -4,6 +4,7 @@
   "description": "Premier League standings and stats",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon -e '*'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ady Weng",
