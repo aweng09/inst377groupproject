@@ -415,6 +415,8 @@ async function accessFan(user) {
 
 async function generateData() {
 
+    document.getElementById('loadMsg').style.visibility = "visible"
+
     let season = "2023"
     const usern = document.getElementById('profile').value
     const fan = await accessFan(usern)
@@ -523,6 +525,7 @@ async function generateData() {
     player_table.appendChild(row)
 
     document.getElementById('player-table').style.visibility = "visible"
-
     document.getElementById('player-image').src = playerStats["player"]["photo"]
+
+    document.getElementById('loadMsg').style.visibility = "hidden"
 }
