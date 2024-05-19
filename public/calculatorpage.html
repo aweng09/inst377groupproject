@@ -6,7 +6,7 @@
   <script type="text/javascript" src="groupproject.js" defer></script>
 </head>
 
-<body onload="getTeamIDs('Manchester City', '2023');">
+<body onload="populateMenu('2023')">
   <!-- Header Section -->
   <header id="pg_header">
     <h1>Premier League Predictions</h1>
@@ -29,7 +29,39 @@
 
     <div class="Match_Calculator_Main">
       <h2>Match Calculator:</h2>
-
+      <div id="match_calculator_options">
+        <fieldset>
+          <legend>Select Factors:</legend>
+          <div>
+            <input type="checkbox" id="standings" name="standings" checked />
+            <label for="standings">Current Standings</label>
+          </div>
+          <div>
+            <input type="checkbox" id="history" name="history" checked/>
+            <label for="history">Fixtures' History</label>
+          </div>
+          <div>
+            <input type="checkbox" id="homeaway" name="homeaway" checked/>
+            <label for="homeaway">Home/Away Record</label>
+          </div>
+        </fieldset>
+        
+        <form onsubmit="getMatchPrediction('2023'); return false;">
+          <label for="match-calculator">Home Team:</label>
+          <select name="home-team" id="home-team">
+            <option value="">--Please choose an option--</option>
+          </select>
+          <br>
+          <label for="match-calculator">Away Team:</label>
+          <select name="away-team" id="away-team">
+            <option value="">--Please choose an option--</option>
+          </select>
+          <br><br>
+          <input type="submit" value="Submit">
+        </form>
+        <h5 id="predicted_win">Predicted Winner: </h5>
+        <h5 id="predicted_score">Predicted Score: </h5>
+      </div>
 
     </div>
 

@@ -185,52 +185,66 @@ async function getTeamIDs(name, season) {
     return(teamID)
 }
 
-async function getMatchPrediction(season, t1, t2) {
+async function getMatchPrediction(season) {
+    const t1 = await getTeamIDs(document.getElementById('home-team').value, season)
+    const t2 = await getTeamIDs(document.getElementById('away-team').value, season)
     let prediction_score = 0
 
     //Standings
-    const currentStandingsAPI = await loadStandingsAPI("2023");
-    const currentStandings = currentStandingsAPI["response"][0]["league"]["standings"][0]
-    let t1rank = 0;
-    let t2rank = 0;
-    for (i in currentStandings) {
-        if (currentStandings[i]["team"]["id"] == t1) {
-            t1rank = currentStandings[i]["rank"]
+    const standingsCheck = document.getElementById('standings')
+    if (standingsCheck.checked) {
+        const currentStandingsAPI = await loadStandingsAPI("2023");
+        const currentStandings = currentStandingsAPI["response"][0]["league"]["standings"][0]
+        let t1rank = 0;
+        let t2rank = 0;
+        for (i in currentStandings) {
+            if (currentStandings[i]["team"]["id"] == t1) {
+                t1rank = currentStandings[i]["rank"]
+            }
+            if (currentStandings[i]["team"]["id"] == t2) {
+                t2rank = currentStandings[i]["rank"]
+            }
         }
-        if (currentStandings[i]["team"]["id"] == t2) {
-            t2rank = currentStandings[i]["rank"]
-        }
+        prediction_score -= ((t1rank - t2rank) / 3)
+        console.log(prediction_score)
     }
-    prediction_score -= ((t1rank - t2rank) / 5)
 
     //Fixtures
-    const fixturesHistoryAPI = await loadHistoricalFixtures(t1, t2)
-    const fixturesHistory = fixturesHistoryAPI["response"]
-    let t1goals = 0;
-    let t2goals = 0;
-    for (i in fixturesHistory) {
-        let home_id = fixturesHistory[i]["teams"]["home"]["id"]
-        let away_id = fixturesHistory[i]["teams"]["away"]["id"]
-        if (home_id == t1) {
-            t1goals += fixturesHistory[i]["goals"]["home"]
-        } else if (away_id == t1) {
-            t1goals += fixturesHistory[i]["goals"]["away"]
-        } else if (home == t2) {
-            t2goals += fixturesHistory[i]["goals"]["home"]
-        } else if (away_id == t2) {
-            t2goals += fixturesHistory[i]["goals"]["away"]
+    const fixturesCheck = document.getElementById('history')
+    if (fixturesCheck.checked) {
+        const fixturesHistoryAPI = await loadHistoricalFixtures(t1, t2)
+        const fixturesHistory = fixturesHistoryAPI["response"]
+        let t1goals = 0;
+        let t2goals = 0;
+        for (i in fixturesHistory) {
+            let home_id = fixturesHistory[i]["teams"]["home"]["id"]
+            let away_id = fixturesHistory[i]["teams"]["away"]["id"]
+            if (home_id == t1) {
+                t1goals += fixturesHistory[i]["goals"]["home"]
+            } else if (away_id == t1) {
+                t1goals += fixturesHistory[i]["goals"]["away"]
+            } else if (home_id == t2) {
+                t2goals += fixturesHistory[i]["goals"]["home"]
+            } else if (away_id == t2) {
+                t2goals += fixturesHistory[i]["goals"]["away"]
+            }
         }
+        prediction_score += ((t1goals - t2goals) / 25)
+        console.log(prediction_score)
     }
-    prediction_score += ((t1goals - t2goals) / 5)
 
     //Home Goals/Conceded vs. Away Goals/Conceded
-    const t1HomeAwayRecordAPI = await loadHomeAwayRecords(season, t1)
-    const t2HomeAwayRecordAPI = await loadHomeAwayRecords(season, t2)
-    
-    const t1HomeRecord = t1HomeAwayRecordAPI["response"]["goals"]["for"]["average"]["home"] - t1HomeAwayRecordAPI["response"]["goals"]["against"]["average"]["home"]
-    const t2AwayRecord = t2HomeAwayRecordAPI["response"]["goals"]["for"]["average"]["away"] - t1HomeAwayRecordAPI["response"]["goals"]["against"]["average"]["away"]
+    const homeawayCheck = document.getElementById('homeaway')
+    if (homeawayCheck.checked) {
+        const t1HomeAwayRecordAPI = await loadHomeAwayRecords(season, t1)
+        const t2HomeAwayRecordAPI = await loadHomeAwayRecords(season, t2)
+        
+        const t1HomeRecord = t1HomeAwayRecordAPI["response"]["goals"]["for"]["average"]["home"] - t1HomeAwayRecordAPI["response"]["goals"]["against"]["average"]["home"]
+        const t2AwayRecord = t2HomeAwayRecordAPI["response"]["goals"]["for"]["average"]["away"] - t1HomeAwayRecordAPI["response"]["goals"]["against"]["average"]["away"]
 
-    prediction_score += (t1HomeRecord - t2AwayRecord)
+        prediction_score += (t1HomeRecord - t2AwayRecord)
+        console.log(prediction_score)
+    }
 
     /* const loadFixturesAPI = await loadFixtures(season)
     const fixtures = loadFixturesAPI["response"]
@@ -243,5 +257,31 @@ async function getMatchPrediction(season, t1, t2) {
         }
     } */
 
-    console.log(prediction_score)
+    if (prediction_score > 0) {
+        document.getElementById('predicted_win').innerHTML = `Predicted Winner: ${document.getElementById('home-team').value}`
+    } else {
+        document.getElementById('predicted_win').innerHTML = `Predicted Winner: ${document.getElementById('away-team').value}`
+    }
+    document.getElementById('predicted_score').innerHTML = `Prediction Score: ${prediction_score}`
+}
+
+async function populateMenu(season) {
+    const homeMenu = document.getElementById('home-team')
+    const awayMenu = document.getElementById('away-team')
+    const teamNamesAPI = await loadTeamIDs(season)
+    const teamNames = teamNamesAPI["response"]
+
+    for (i in teamNames) {
+        const option = document.createElement('option')
+        option.value = teamNames[i]["team"]["name"]
+        option.innerHTML = teamNames[i]["team"]["name"]
+        homeMenu.appendChild(option)
+    }
+
+    for (i in teamNames) {
+        const option = document.createElement('option')
+        option.value = teamNames[i]["team"]["name"]
+        option.innerHTML = teamNames[i]["team"]["name"]
+        awayMenu.appendChild(option)
+    }
 }
