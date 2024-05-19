@@ -1,8 +1,10 @@
 const supabaseClient = require('@supabase/supabase-js')
+const bodyParser = require('body-parser')
 const express = require('express')
 
 const app = express()
 const port = 3000
+app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'))
 
 const supabaseURL = 'https://pkdvzleaydwkzpjgpwuq.supabase.co'
@@ -13,12 +15,32 @@ app.get('/', (req, res) => {
     res.sendFile('public/homepage.html', { root: __dirname })
 })
 
-app.get('/home', async (req, res) => {
-    console.log('Attempting to GET all teams')
+app.get('/fanpage', async (req, res) => {
+    console.log('Attempting to GET all fans')
     const { data, error } = await supabase
-        .from('PremierLeagueTeams')
+        .from('Fans')
         .select()
-    
+
+    if (error) {
+        console.log('Error')
+        res.send(error)
+    } else {
+        res.send(data)
+    }
+})
+
+app.post('/fanpage', async (req, res) => {
+    console.log("Adding Fan")
+    var username = req.body.username
+    var name = req.body.name
+    var fav_team = req.body.fav_team
+    var fav_player = req.body.fav_player
+
+    const { data, error } = await supabase
+        .from('Fans')
+        .insert({ 'username': username, 'name': name, 'fav_team': fav_team, 'fav_player': fav_player })
+        .select()
+
     if (error) {
         console.log('Error')
         res.send(error)

@@ -6,7 +6,7 @@
   <script type="text/javascript" src="groupproject.js" defer></script>
 </head>
 
-<body onload="populateFanMenus('2023')">
+<body onload="populateFanMenus('2023'); loadFanData()">
   <!-- Header Section -->
   <header id="pg_header">
     <h1>Premier League Predictions</h1>
@@ -30,12 +30,15 @@
     <div class="profile-login">
       <form>
         <label for="login">Login: </label>
-        <input type="text" id="login">
+        <select name="profile" id="profile">
+          <option value="">--Please choose an option--</option>
+        </select>
+        <br><br>
         <input type="submit" value="Login!">
       </form>      
     </div>
     <div class="profile-signup">
-      <form>
+      <form onsubmit="createFan(); return false">
         <label for="signup">Username: </label>
         <input type="text" id="username" size="30">
         <br>

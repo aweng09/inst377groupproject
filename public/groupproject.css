@@ -66,7 +66,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 10%;
+  gap: 50px;
 }
 
 .content-area {

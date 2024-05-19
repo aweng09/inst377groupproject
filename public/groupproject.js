@@ -334,3 +334,39 @@ async function populateFanMenus(season) {
         }
     }
 }
+
+async function loadFanData() {
+    await fetch(`${host}/fanpage`)
+        .then((res) => res.json())
+        .then((res) => {
+            var profile_selector = document.getElementById('profile')
+            while (profile_selector.options.length > 0) {
+                profile_selector.remove(0);
+            }
+            for (i in res) {
+                const option = document.createElement('option')
+                option.value = res[i]["username"]
+                option.innerHTML = res[i]["username"]
+                profile_selector.appendChild(option)
+            }
+        })
+}
+
+async function createFan() {
+    await fetch(`${host}/fanpage`, {
+        method: 'POST',
+        body: JSON.stringify({
+            "username": `${document.getElementById("username").value}`,
+            "name": `${document.getElementById("name").value}`,
+            "fav_team": `${document.getElementById("fav-team").value}`,
+            "fav_player": `${document.getElementById("fav-player").value}`,
+        }),
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    .then((res) => res.json())
+    .then((res) => async function() {
+    })
+    await loadFanData();
+}
