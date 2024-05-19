@@ -3,10 +3,11 @@
 <head>
   <title>Premier League Predictions - Fan Home</title>
   <link rel="stylesheet" href="groupproject.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="text/javascript" src="groupproject.js" defer></script>
 </head>
 
-<body onload="populateFanMenus('2023'); loadFanData()">
+<body onload="populateFanMenus('2023'); accessFanData()">
   <!-- Header Section -->
   <header id="pg_header">
     <h1>Premier League Predictions</h1>
@@ -24,11 +25,41 @@
 
   </nav>
 
-  <h1 style="text-align: center;">Fan Home</h1>
+  <h1 style="text-align: center;" id="fanLogo">Fan Home</h1>
+
+  <div class="content-container">
+    <div class="chart-box">
+      <canvas id="stockChart"></canvas>
+    </div>
+    <br>
+    <div class="player-box">
+      <table id="player-table">
+        <thead>
+          <th colspan="10" id="player-name"> </th>
+        </thead>
+        <tr>
+          <th>Position</th>
+          <th>Goals</th>
+          <th>Assists</th>
+          <th>Appearances</th>
+          <th>Shots On Target</th>
+          <th>Key Passes</th>
+          <th>Tackles</th>
+          <th>Interceptions</th>
+          <th>Duels</th>
+          <th>Avg. Rating (/10)</th>
+        </tr>
+      </table>
+      <div>
+        <img id="player-image" width="80px" height="80px">
+      </div>
+    </div>
+    <br><br>
+  </div>
 
   <div class="main-container_home">
     <div class="profile-login">
-      <form>
+      <form onsubmit="generateData(); return false">
         <label for="login">Login: </label>
         <select name="profile" id="profile">
           <option value="">--Please choose an option--</option>

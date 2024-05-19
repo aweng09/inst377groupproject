@@ -10,6 +10,12 @@ body {
   background-color: rgb(221, 84, 49);
 }
 
+#player-table {
+  table, th, td {
+    border: 0.5px solid black;
+  }
+}
+
 .header-footer {
   text-align: center;
   color: skyblue;
@@ -142,6 +148,19 @@ body {
   border-style: double;
   border-width: 3px;
   padding: 10px;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
 }
 
 .Match_Predictor_box {

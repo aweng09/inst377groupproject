@@ -282,6 +282,32 @@ async function getMatchPrediction(season) {
     document.getElementById('predicted_score').innerHTML = `Prediction Score: ${prediction_score}`
 }
 
+//Fan Page
+
+function loadTeamStatistics(season, team) {
+    const url = `https://api-football-v1.p.rapidapi.com/v3/teams/statistics?league=39&season=${season}&team=${team}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '4a22194a81msh0f5b0d07d8e2f6cp198988jsnb1716b80fe43',
+            'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+        }
+    };
+    return (fetch(url, options).then((res) => res.json()));
+}
+
+function loadPlayerStatistics(season, player) {
+    const url = `https://api-football-v1.p.rapidapi.com/v3/players?id=${player}&season=${season}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '4a22194a81msh0f5b0d07d8e2f6cp198988jsnb1716b80fe43',
+            'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+        }
+    };
+    return (fetch(url, options).then((res) => res.json()));
+}
+
 async function populateMenu(season) {
     const homeMenu = document.getElementById('home-team')
     const awayMenu = document.getElementById('away-team')
@@ -335,7 +361,7 @@ async function populateFanMenus(season) {
     }
 }
 
-async function loadFanData() {
+async function accessFanData() {
     await fetch(`${host}/fanpage`)
         .then((res) => res.json())
         .then((res) => {
@@ -365,8 +391,8 @@ async function createFan() {
             "Content-type": "application/json"
         }
     })
-    .then((res) => res.json())
-    .then((res) => async function() {
-    })
-    await loadFanData();
+        .then((res) => res.json())
+        .then((res) => async function () {
+        })
+    await accessFanData();
 }
