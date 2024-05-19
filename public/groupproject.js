@@ -396,3 +396,130 @@ async function createFan() {
         })
     await accessFanData();
 }
+//New
+
+async function accessFan(user) {
+    var fan_obj;
+    await fetch(`${host}/fanpage`)
+        .then((res) => res.json())
+        .then((res) => {
+            for (i in res) {
+                if (res[i]["username"] == user) {
+                    fan_obj = res[i]
+                }
+            }
+        })
+    return fan_obj
+}
+
+async function generateData() {
+
+    let season = "2023"
+    const usern = document.getElementById('profile').value
+    const fan = await accessFan(usern)
+    const team = await getTeamIDs(fan["fav_team"], season)
+
+    const teamStatisticsAPI = await loadTeamStatistics(season, team)
+    const teamStatistics = teamStatisticsAPI["response"]
+    console.log(teamStatisticsAPI)
+
+    document.getElementById('fanLogo').innerHTML = `<img src=\"${teamStatistics["team"]["logo"]}\" width=\"30px\" height=\"30px\"> Fan Home <img src=\"${teamStatistics["team"]["logo"]}\" width=\"30px\" height=\"30px\">`;
+
+    //Basic Data Chart
+    let ctx = document.getElementById('stockChart');
+    document.getElementById('stockChart').style.height = "300px";
+    document.getElementById('stockChart').style.width = "350px";
+
+    if (Chart.getChart('stockChart') != undefined) {
+        Chart.getChart('stockChart').destroy();
+    }
+
+    new Chart(ctx,
+        {
+            type: "bar",
+            data: {
+                labels: ["Wins", "Losses", "Draws", "Clean Sheets", "Failed to Score"],
+                datasets: [{
+                    label: 'Home',
+                    data: [teamStatistics["fixtures"]["wins"]["home"], teamStatistics["fixtures"]["loses"]["home"], teamStatistics["fixtures"]["draws"]["home"], teamStatistics["clean_sheet"]["home"], teamStatistics["failed_to_score"]["home"]],
+                    borderWidth: 1,
+                    borderColor: "rgb(0,0,0)",
+                    backgroundColor: "rgb(255, 105, 98)"
+                },
+                {
+                    label: 'Away',
+                    data: [teamStatistics["fixtures"]["wins"]["away"], teamStatistics["fixtures"]["loses"]["away"], teamStatistics["fixtures"]["draws"]["away"], teamStatistics["clean_sheet"]["away"], teamStatistics["failed_to_score"]["away"]],
+                    borderWidth: 1,
+                    borderColor: "rgb(0,0,0)",
+                    backgroundColor: "rgb(119, 221, 118)"
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Basic Data"
+                    }
+                }
+            }
+        }
+    );
+
+    //Favorite Player Table
+    let favPlayerID = 0;
+    const loadPlayersAPI = await loadPlayerIDs(team)
+    const playersAPI = loadPlayersAPI["response"][0]["players"]
+    for (i in playersAPI) {
+        if (playersAPI[i]["name"] == fan["fav_player"]) {
+            favPlayerID = playersAPI[i]["id"]
+        }
+    }
+    const loadPlayerStatisticsAPI = await loadPlayerStatistics(season, favPlayerID)
+    const playerStats = loadPlayerStatisticsAPI["response"][0]
+    console.log(playerStats)
+
+    player_table = document.getElementById('player-table')
+    document.getElementById('player-name').innerHTML = `${playerStats["player"]["firstname"]} ${playerStats["player"]["lastname"]}, ${playerStats["player"]["nationality"]}`
+
+    const row = document.createElement('tr')
+
+    if (player_table.rows.length > 2) {
+        player_table.deleteRow(player_table.rows.length - 1);
+    }
+
+    const cell1 = document.createElement('td')
+    cell1.innerHTML = playerStats["statistics"][0]["games"]["position"]
+    const cell2 = document.createElement('td')
+    cell2.innerHTML = playerStats["statistics"][0]["goals"]["total"]
+    const cell3 = document.createElement('td')
+    cell3.innerHTML = playerStats["statistics"][0]["goals"]["assists"]
+    const cell4 = document.createElement('td')
+    cell4.innerHTML = playerStats["statistics"][0]["games"]["appearences"]
+    const cell5 = document.createElement('td')
+    cell5.innerHTML = playerStats["statistics"][0]["shots"]["on"]
+    const cell6 = document.createElement('td')
+    cell6.innerHTML = playerStats["statistics"][0]["passes"]["key"]
+    const cell7 = document.createElement('td')
+    cell7.innerHTML = playerStats["statistics"][0]["tackles"]["total"]
+    const cell8 = document.createElement('td')
+    cell8.innerHTML = playerStats["statistics"][0]["tackles"]["interceptions"]
+    const cell9 = document.createElement('td')
+    cell9.innerHTML = `${playerStats["statistics"][0]["duels"]["won"]}/${playerStats["statistics"][0]["duels"]["total"]}`
+    const cell10 = document.createElement('td')
+    cell10.innerHTML = playerStats["statistics"][0]["games"]["rating"]
+
+    row.appendChild(cell1)
+    row.appendChild(cell2)
+    row.appendChild(cell3)
+    row.appendChild(cell4)
+    row.appendChild(cell5)
+    row.appendChild(cell6)
+    row.appendChild(cell7)
+    row.appendChild(cell8)
+    row.appendChild(cell9)
+    row.appendChild(cell10)
+    player_table.appendChild(row)
+
+    document.getElementById('player-image').src = playerStats["player"]["photo"]
+}
