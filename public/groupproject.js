@@ -476,7 +476,7 @@ async function generateData() {
                 plugins: {
                     title: {
                         display: true,
-                        text: "Basic Data"
+                        text: "Basic Team Data"
                     }
                 }
             }

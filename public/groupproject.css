@@ -155,6 +155,20 @@ body {
   justify-content: center;
 }
 
+.first-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .player-box {
   display: flex;
   flex-direction: row;
