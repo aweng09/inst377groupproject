@@ -413,6 +413,20 @@ async function accessFan(user) {
     return fan_obj
 }
 
+async function generateImages() {
+    let season = "2023"
+    const usern = document.getElementById('profile').value
+    const fan = await accessFan(usern)
+    const team = await getTeamIDs(fan["fav_team"], season)
+
+    const loadPlayersAPI = await loadPlayerIDs(team)
+    const playersAPI = loadPlayersAPI["response"][0]["players"]
+
+    for (let i = 0; i < 10; i++) {
+        document.getElementById(`slides${i}`).src = `${playersAPI[i]["photo"]}`;
+    };
+}
+
 async function generateData() {
 
     document.getElementById('loadMsg').style.visibility = "visible"
@@ -431,7 +445,7 @@ async function generateData() {
     //Basic Data Chart
     let ctx = document.getElementById('stockChart');
     document.getElementById('stockChart').style.height = "300px";
-    document.getElementById('stockChart').style.width = "350px";
+    document.getElementById('stockChart').style.width = "650px";
 
     if (Chart.getChart('stockChart') != undefined) {
         Chart.getChart('stockChart').destroy();

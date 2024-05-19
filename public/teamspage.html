@@ -5,6 +5,10 @@
   <link rel="stylesheet" href="groupproject.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="text/javascript" src="groupproject.js" defer></script>
+
+  <style>
+    div[data-simple-slider] { width:200px; height:200px; }
+</style>
 </head>
 
 <body onload="populateFanMenus('2023'); accessFanData()">
@@ -26,9 +30,55 @@
   </nav>
 
   <h1 style="text-align: center;" id="fanLogo">Fan Home</h1>
-  <h4 id="loadMsg" style="visibility: hidden;text-align: center">Please wait while we load your fanpage!</h4>
 
+  <div class="main-container_home">
+    <div class="profile-login">
+      <form onsubmit="generateData(); generateImages(); return false;">
+        <label for="login">Login: </label>
+        <select name="profile" id="profile">
+          <option value="">--Please choose an option--</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Login!">
+      </form>
+    </div>
+    <div class="profile-signup">
+      <form onsubmit="createFan(); return false">
+        <label for="signup">Username: </label>
+        <input type="text" id="username" size="30">
+        <br>
+        <label for="signup">Name: &nbsp&nbsp&nbsp</label>
+        <input type="text" id="name" size="30">
+        <br>
+        <label for="signup">Favorite Team:</label>
+        <select name="fav_team" id="fav-team">
+          <option value="">--Please choose an option--</option>
+        </select>
+        <br>
+        <label for="signup">Favorite Player:</label>
+        <select name="fav_player" id="fav-player">
+          <option value="">--Please choose an option--</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Signup!">
+      </form>
+    </div>
+  </div>
+  
+  <h4 id="loadMsg" style="visibility: hidden;text-align: center">Please wait while we load your fanpage!</h4>
   <div class="content-container">
+    <div class="imageContainer" id="playerImages" data-simple-slider>
+      <img class="image" id="slides0" src=""/>
+      <img class="image" id="slides1" src=""/>
+      <img class="image" id="slides2" src=""/>
+      <img class="image" id="slides3" src=""/>
+      <img class="image" id="slides4" src=""/>
+      <img class="image" id="slides5" src=""/>
+      <img class="image" id="slides6" src=""/>
+      <img class="image" id="slides7" src=""/>
+      <img class="image" id="slides8" src=""/>
+      <img class="image" id="slides9" src=""/>
+    </div>
     <div class="chart-box">
       <canvas id="stockChart"></canvas>
     </div>
@@ -58,39 +108,10 @@
     <br><br>
   </div>
 
-  <div class="main-container_home">
-    <div class="profile-login">
-      <form onsubmit="generateData(); return false">
-        <label for="login">Login: </label>
-        <select name="profile" id="profile">
-          <option value="">--Please choose an option--</option>
-        </select>
-        <br><br>
-        <input type="submit" value="Login!">
-      </form>      
-    </div>
-    <div class="profile-signup">
-      <form onsubmit="createFan(); return false">
-        <label for="signup">Username: </label>
-        <input type="text" id="username" size="30">
-        <br>
-        <label for="signup">Name: &nbsp&nbsp&nbsp</label>
-        <input type="text" id="name" size="30">
-        <br>
-        <label for="signup">Favorite Team:</label>
-        <select name="fav_team" id="fav-team">
-          <option value="">--Please choose an option--</option>
-        </select>
-        <br>
-          <label for="signup">Favorite Player:</label>
-          <select name="fav_player" id="fav-player">
-            <option value="">--Please choose an option--</option>
-          </select>
-        <br><br>
-        <input type="submit" value="Signup!">
-      </form>
-    </div>
-  </div>
 </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-slider/1.0.0/simpleslider.min.js"></script>
+  <script>
+    simpleslider.getSlider();
+  </script>
 
 </html>

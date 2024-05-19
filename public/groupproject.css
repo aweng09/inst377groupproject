@@ -16,6 +16,11 @@ body {
   }
 }
 
+#imageContainer {
+  margin-left: 40%;
+  margin-right: 30%;
+}
+
 .header-footer {
   text-align: center;
   color: skyblue;
@@ -146,6 +151,8 @@ body {
 .content-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .player-box {
