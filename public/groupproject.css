@@ -23,13 +23,6 @@ body {
   background-color: violet;
 }
 
-.footer {
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-}
-
-
 #main-nav {
   text-align: center;
   background-color: rgba(233, 118, 118, 0.913);

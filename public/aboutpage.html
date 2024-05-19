@@ -1,87 +1,90 @@
 <html>
-    <head>
-        <title>About Page</title>
-        <link rel="stylesheet" href="groupproject.css">
-    </head>
-    <body>
-          <!-- Header Section -->
-      <header id="pg_header">
+
+<head>
+    <title>About Page</title>
+    <link rel="stylesheet" href="groupproject.css">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header id="pg_header">
         <h1>About Us</h1>
-          </header>
-          <!-- Navigation Menu-->
-    
-     <nav id="main-nav">
+    </header>
+    <!-- Navigation Menu-->
+
+    <nav id="main-nav">
         <ul>
-           <li><a href= "homepage.html"> Home</a></li>
-          <li><a href= "rankingspage.html"> Rankings</a></li>
-          <li><a href= "calculatorpage.html"> Calculator</a></li>
-          <li><a href= "teamspage.html"> Fan Home</a></li>
-          <li><a href ="aboutpage.html"> About</a></li>
-          <li><a href= "helppage.html"> Help</a></li>
-        </ul></nav>
-        <div class="About Us Description">
-            <h1 style="text-align: center;">About Us</h1>  
-            <p style="font-family:Georgia, 'Times New Roman', Times, serif;">Welcome To Premier League Predictions! 
-                Your go to destination for accurate
-                and insightful predictions on Premier League Sports matches.
-            </p>
-            <p style="font-family: Georgia, 'Times New Roman', Times, serif;">
-            Mission Statement: Our Mission to provide sports fans reliable 
-            and data driven predictions to enhance their enjoyment. Whether youre 
+            <li><a href="homepage.html"> Home</a></li>
+            <li><a href="rankingspage.html"> Rankings</a></li>
+            <li><a href="calculatorpage.html"> Calculator</a></li>
+            <li><a href="teamspage.html"> Fan Home</a></li>
+            <li><a href="aboutpage.html"> About</a></li>
+            <li><a href="helppage.html"> Help</a></li>
+        </ul>
+    </nav>
+    <div class="About Us Description">
+        <h1 style="text-align: center;">About Us</h1>
+        <p style="font-family:Georgia, 'Times New Roman', Times, serif;">Welcome To Premier League Predictions!
+            Your go to destination for accurate
+            and insightful predictions on Premier League Sports matches.
+        </p>
+        <p style="font-family: Georgia, 'Times New Roman', Times, serif;">
+            Mission Statement: Our Mission to provide sports fans reliable
+            and data driven predictions to enhance their enjoyment. Whether youre
             a seasoned better, fantasy football enthusiant, or supporter. You can
-           trust our predictions to keep you ahead of the game
-    
-           <p>
-    
-           </div>
-<div class="main-container_home">   
-    
-            <div class="contact_box">
-                <h2>Have Questions, Suggestions, or feedback?, Please reach out below!
-                    Our email: 
-                </h2>
-                <form name="Contact_form" action="Sucessform.html" onsubmit="return(validate())">
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" id="contact_box" required>
-                    <label for="date">Select date:</label>
-                    <input type="date" id="current_date" name="date_picker"min="1904-01-01" max="2024-03-10" required>
-                   <br> <label for="Concerns">Concerns:</label><br>
-                    <textarea id="Concern" name="User_Concern" rows="4" cols="50">
-            
+            trust our predictions to keep you ahead of the game
+
+        <p>
+
+    </div>
+    <div class="main-container_home">
+
+        <div class="contact_box">
+            <h2>Have Questions, Suggestions, or feedback?, Please reach out below!
+                Our email:
+            </h2>
+            <form name="Contact_form" action="Sucessform.html" onsubmit="return(validate())">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="contact_box" required>
+                <label for="date">Select date:</label>
+                <input type="date" id="current_date" name="date_picker" min="1904-01-01" max="2024-03-10" required>
+                <br> <label for="Concerns">Concerns:</label><br>
+                <textarea id="Concern" name="User_Concern" rows="4" cols="50">
+
                     </textarea><br>
-                    
-                        <br> <button onclick="validate()">Submit</button>
-                    </select><br>
-            
-                    <script type="text/javascript">
-                        function validate() {
-                            var validation = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-                          if (validation.test(document.Contact_form.Concern.value))
-                        {alert("Special Character!");
-            return true;}}
-                        
-                 </script>
-            
-                </form>
-               
-            
-            </div>
-      
-            <div class="getinvolved_box">
-                <h2>Get Involved</h2>
-    
-        <ul>
-        <li>Join the Premier League Predictions Community Today and elevate 
-            your football experience</li>
-        <li>Regulary Visit our page to stay updated </li>
-            </div>
-            </div>
-       </ul>
-      
+
+                <br> <button onclick="validate()">Submit</button>
+                </select><br>
+
+                <script type="text/javascript">
+                    function validate() {
+                        var validation = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                        if (validation.test(document.Contact_form.Concern.value)) {
+                            alert("Special Character!");
+                            return true;
+                        }
+                    }
+
+                </script>
+
+            </form>
+
+
+        </div>
+
+        <div class="getinvolved_box">
+            <h2>Get Involved</h2>
+
+            <ul>
+                <li>Join the Premier League Predictions Community Today and elevate
+                    your football experience</li>
+                <li>Regulary Visit our page to stay updated </li>
+        </div>
+    </div>
     </ul>
-</div>
 
-    <footer class="footer" id="pg_header"> <p>Premier League Predictions</p> </footer>
+    </ul>
+    </div>
+</body>
 
-    </body>
 </html>

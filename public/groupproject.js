@@ -396,6 +396,7 @@ async function createFan() {
         })
     await accessFanData();
 }
+
 //New
 
 async function accessFan(user) {
@@ -520,6 +521,8 @@ async function generateData() {
     row.appendChild(cell9)
     row.appendChild(cell10)
     player_table.appendChild(row)
+
+    document.getElementById('player-table').style.visibility = "visible"
 
     document.getElementById('player-image').src = playerStats["player"]["photo"]
 }
