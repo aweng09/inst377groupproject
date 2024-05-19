@@ -1,288 +1,77 @@
 <html>
+
+<head>
+  <title>Premier League Predictions - Rankings</title>
+  <link rel="stylesheet" href="groupproject.css">
+  <script type="text/javascript" src="groupproject.js" defer></script>
+</head>
+
+<body onload="getRankingsData()">
+  <!-- Header Section -->
+  <header id="pg_header">
+    <h1>Premier League Predictions</h1>
+  </header>
+  <!-- Navigation Menu-->
+  <nav id="main-nav">
+    <ul>
+      <li><a href="homepage.html"> Home</a></li>
+      <li><a href="rankingspage.html"> Rankings</a></li>
+      <li><a href="calculatorpage.html"> Calculator</a></li>
+      <li><a href="teamspage.html"> Teams</a></li>
+      <li><a href="aboutpage.html"> About</a></li>
+      <li><a href="helppage.html"> Help</a></li>
+    </ul>
+
+  </nav>
+
+  <!-- Main Content Area -->
+
+  <div class="main-container_home">
+    <H1 style="text-align: center;">Premier League Rankings</H1>
+
     <head>
-        <title>Premier League Predictions - Rankings</title>
-        <link rel="stylesheet" href="groupproject.css">
+      <style>
+        table,
+        th,
+        td {
+          border: 1px solid black;
+          border-collapse: collapse;
+          font-family: Arial, Helvetica, sans-serif;
+          color: #821ae9;
+        }
 
+        th,
+        td {
+          background-color: #ffffffc8;
+        }
+
+        tr:hover {
+          background-color: #D6EEEE;
+        }
+      </style>
     </head>
-    <body>
-         <!-- Header Section -->
-      <header id="pg_header">
-        <h1>Premier League Predictions</h1>
-          </header>
-          <!-- Navigation Menu-->
-          <nav id="main-nav">
-            <ul>
-                <li><a href= "homepage.html"> Home</a></li>
-                <li><a href= "rankingspage.html"> Rankings</a></li>
-                <li><a href= "calculatorpage.html"> Calculator</a></li>
-                <li><a href= "teamspage.html"> Teams</a></li>
-                <li><a href ="aboutpage.html"> About</a></li>
-                <li><a href= "helppage.html"> Help</a></li>
-            </ul>
+    <table class="premiertablecenter" id="rankingsTable">
+      <thead>
+        <th colspan="9">Current Premier League Rankings (2023-2024)</th>
+      </thead>
+      <tr>
+        <th>Position</th>
+        <th></th>
+        <th>Club</th>
+        <th>Played</th>
+        <th>Won</th>
+        <th>Lost</th>
+        <th>Drew</th>
+        <th>Pts</th>
+        <th>GD</th>
+      </tr>
+    </table>
 
-          </nav>
+  </div>
+</body>
 
-          <!-- Main Content Area -->
+<footer class="footer" id="pg_header">
+  <p>Premier League Predictions</p>
+</footer>
 
-          <div class="main-container_home">
-            <H1 style="text-align: center;">Premier League Rankings</H1>
-
-            <head>
-              <style>
-                 table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            font-family:Arial, Helvetica, sans-serif;
-            color: #821ae9;}
-            th, td {background-color: #ffffffc8;}
-            tr:hover {background-color: #D6EEEE;
-          }
-
-                  </style>
-            </head>
-            <table  class="premiertablecenter">
-              <tr>
-              </tr>
-              <th colspan="8">Current Premier League Rankings:</th>
-                <th>Season 2023-2024</th>
-              <tr>
-                <th>Position</th>
-                <th>Club </th>
-                <th>Played</th>
-                <th>Won</th>
-                <th>Lost</th>
-                <th>Pts</th>
-                <th>GD</th>
-                <th>Probablity at Winning UCL</th>
-                <th>Probablity at Winning League</th>
-              </tr>
-              <tr>
-                <td>1.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>2.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>3.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>4.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>5.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>6.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>7.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>8.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>9.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>10.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>11.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>12.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>13.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>14.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>15.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>16.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>17.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>18.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>19.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>20.</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-             
-            </table>
-
-    
-
-          </div>
-    </body>
-
-    <footer class="footer" id="pg_header"> <p>Premier League Predictions</p> </footer>
 </html>
