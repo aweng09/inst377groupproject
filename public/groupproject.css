@@ -65,7 +65,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  gap: 45px;
 }
 
 .content-area {
@@ -151,6 +151,14 @@ body {
 .player-box {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+}
+
+.boxes-container {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 25px;
