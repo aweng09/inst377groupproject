@@ -67,17 +67,22 @@ async function getHomeData() {
     }
 
     //Upcoming Games (Home Page)
-    const upcomingGamesAPI = await loadUpcomingGames("2023")
+    const upcomingGamesAPI = await loadUpcomingGames('2023')
     const upcomingGames = upcomingGamesAPI["response"]
 
     const lst = document.getElementById('upcomingGamesList')
 
-    for (let i = 0; i < 10; i++) {
+    if (upcomingGames.length != 0) {
+        for (let i = 0; i < 10; i++) {
+            const newFixture = document.createElement('li')
+            newFixture.innerHTML = `${upcomingGames[i]["teams"]["home"]["name"]} vs. ${upcomingGames[i]["teams"]["away"]["name"]} | ${upcomingGames[i]["fixture"]["date"]}`
+            lst.appendChild(newFixture)
+        }
+    } else {
         const newFixture = document.createElement('li')
-        newFixture.innerHTML = `${upcomingGames[i]["teams"]["home"]["name"]} vs. ${upcomingGames[i]["teams"]["away"]["name"]} | ${upcomingGames[i]["fixture"]["date"]}`
+        newFixture.innerHTML = "No more upcoming games! Check back next season."
         lst.appendChild(newFixture)
     }
-
 }
 
 async function getRankingsData() {
@@ -161,6 +166,18 @@ function loadTeamIDs(season) {
     return (fetch(url, options).then((res) => res.json()));
 }
 
+function loadPlayerIDs(team) {
+    const url = `https://api-football-v1.p.rapidapi.com/v3/players/squads?team=${team}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '4a22194a81msh0f5b0d07d8e2f6cp198988jsnb1716b80fe43',
+            'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+        }
+    };
+    return (fetch(url, options).then((res) => res.json()));
+}
+
 function loadFixtures(season) {
     const url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=39&season=${season}`;
     const options = {
@@ -182,7 +199,7 @@ async function getTeamIDs(name, season) {
             teamID = teamIDs[i]["team"]["id"]
         }
     }
-    return(teamID)
+    return (teamID)
 }
 
 async function getMatchPrediction(season) {
@@ -238,7 +255,7 @@ async function getMatchPrediction(season) {
     if (homeawayCheck.checked) {
         const t1HomeAwayRecordAPI = await loadHomeAwayRecords(season, t1)
         const t2HomeAwayRecordAPI = await loadHomeAwayRecords(season, t2)
-        
+
         const t1HomeRecord = t1HomeAwayRecordAPI["response"]["goals"]["for"]["average"]["home"] - t1HomeAwayRecordAPI["response"]["goals"]["against"]["average"]["home"]
         const t2AwayRecord = t2HomeAwayRecordAPI["response"]["goals"]["for"]["average"]["away"] - t1HomeAwayRecordAPI["response"]["goals"]["against"]["average"]["away"]
 
@@ -283,5 +300,37 @@ async function populateMenu(season) {
         option.value = teamNames[i]["team"]["name"]
         option.innerHTML = teamNames[i]["team"]["name"]
         awayMenu.appendChild(option)
+    }
+}
+
+async function populateFanMenus(season) {
+
+    //Team Choices
+    const teamMenu = document.getElementById('fav-team')
+    const playerMenu = document.getElementById('fav-player')
+    const teamNamesAPI = await loadTeamIDs(season)
+    const teamNames = teamNamesAPI["response"]
+
+    for (i in teamNames) {
+        const option = document.createElement('option')
+        option.value = teamNames[i]["team"]["name"]
+        option.innerHTML = teamNames[i]["team"]["name"]
+        teamMenu.appendChild(option)
+    }
+
+    //Player Choices
+    document.getElementById('fav-team').onchange = async () => {
+        while (playerMenu.options.length > 0) {
+            playerMenu.remove(0);
+        }
+        team_choice = await getTeamIDs(document.getElementById('fav-team').value, '2023')
+        const loadPlayersAPI = await loadPlayerIDs(team_choice)
+        const playersAPI = loadPlayersAPI["response"][0]["players"]
+        for (i in playersAPI) {
+            const option = document.createElement('option')
+            option.value = playersAPI[i]["name"]
+            option.innerHTML = playersAPI[i]["name"]
+            playerMenu.appendChild(option)
+        }
     }
 }
