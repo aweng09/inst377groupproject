@@ -23,4 +23,5 @@ English Premier League Predictor and Fan Page, we're focused on conveying exact 
 
 This project is not targeted towards any specific browsers and should be relatively compatible with iOS, Android, in addition to mainstream web browsers such as Google Chrome, Microsoft Edge, and Safari.
 
+## Developer Manual
 For information regarding the Developer Manual, [click here](https://docs.google.com/document/d/13eOi1OKomMfztslCdDflfDB1NftVFzhcA_fVwGhCG24/edit?usp=sharing).
