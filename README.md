@@ -5,10 +5,9 @@ This project is an English Premier League predictor and fan page for a) predicti
 
 Here is a breakdown of the different segments you’ll track down on our website:
 
-Home Page: Our Home Page fills in as a center point where you can access all the most recent match predictions, news updates, and highlights. It gives a fast outline of forthcoming fixtures and ongoing outcomes, guaranteeing you never think twice when it comes to your favorite teams. 
+Home Page: Our Home Page fills in as a center point where you can access the upcoming matches and the current standings. It gives a fast outline of the current state of the Premier League, guaranteeing you never think twice when it comes to your favorite teams.
 
-
-Rankings Page:  Plunge into the Rankings segment to find where each group remains in the league table. From strong competitors to underdogs, this segment offers an itemized breakdown of teak standings, points earned, and objective differentials, giving important insights into the present status of the league.
+Rankings Page:  Plunge into the Rankings segment to find where each group remains in the league table. From strong competitors to underdogs, this segment offers an itemized breakdown of the standings, points earned, and objective differentials, giving important insights into the present status of the league.
 
 Calculator: Need to do some predicting? Our Calculator device permits you to anticipate hypothetical match results based on a number of factors (_e.g., current standings, home/away records, history of the fixture)_. Whether you're arranging your fantasy football setup or dissecting the effect of a draw or triumph, our number cruncher makes it simple to investigate different potential outcomes.
 
