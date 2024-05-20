@@ -178,18 +178,6 @@ function loadPlayerIDs(team) {
     return (fetch(url, options).then((res) => res.json()));
 }
 
-function loadFixtures(season) {
-    const url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=39&season=${season}`;
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': '4a22194a81msh0f5b0d07d8e2f6cp198988jsnb1716b80fe43',
-            'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
-        }
-    };
-    return (fetch(url, options).then((res) => res.json()));
-}
-
 function loadFixturesStatistics(fixture, team) {
     const url = `https://api-football-v1.p.rapidapi.com/v3/fixtures/statistics?fixture=${fixture}&team=${team}`;
     const options = {
@@ -275,17 +263,6 @@ async function getMatchPrediction(season) {
         console.log(prediction_score)
     }
 
-    /* const loadFixturesAPI = await loadFixtures(season)
-    const fixtures = loadFixturesAPI["response"]
-    
-    for (i in fixtures) {
-        if (fixtures[i]["teams"]["home"]["id"] == t1 && fixtures[i]["teams"]["away"]["id"] == t2) {
-            prediction_score += (t1HomeRecord - t2AwayRecord)
-        } else if (fixtures[i]["teams"]["away"]["id"] == t1 && fixtures[i]["teams"]["home"]["id"] == t2) {
-            prediction_score += (t1AwayRecord - t2HomeRecord)
-        }
-    } */
-
     if (prediction_score > 0) {
         document.getElementById('predicted_win').innerHTML = `Predicted Winner: ${document.getElementById('home-team').value}`
     } else {
@@ -320,7 +297,7 @@ function loadPlayerStatistics(season, player) {
     return (fetch(url, options).then((res) => res.json()));
 }
 
-function loadFixtures(season, team) {
+function loadTeamFixtures(season, team) {
     const url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?season=${season}&team=${team}`;
     const options = {
         method: 'GET',
@@ -568,7 +545,7 @@ async function generateData() {
 
     //Fixtures
     
-    const fixturesAPI = await loadFixtures(season, team)
+    const fixturesAPI = await loadTeamFixtures(season, team)
     const fixtures = fixturesAPI["response"]
     const fixMenu = document.getElementById('fixtureMenu')
     
