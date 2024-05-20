@@ -564,9 +564,14 @@ async function generateData() {
     document.getElementById('player-image').src = playerStats["player"]["photo"]
 
     //Fixtures
+    
     const fixturesAPI = await loadFixtures(season, team)
     const fixtures = fixturesAPI["response"]
     const fixMenu = document.getElementById('fixtureMenu')
+    
+    while (fixMenu.options.length > 0) {
+        fixMenu.remove(0);
+    }
 
     for (i in fixtures) {
         const option = document.createElement('option')
@@ -574,6 +579,9 @@ async function generateData() {
         option.innerHTML = `${fixtures[i]["teams"]["home"]["name"]} vs. ${fixtures[i]["teams"]["away"]["name"]}, ${fixtures[i]["fixture"]["date"]}`
         fixMenu.appendChild(option)
     }
+
+    const statisticsList = document.getElementById('statistics')
+    statisticsList.innerHTML = ''
 
     document.getElementById('player-table').style.visibility = "visible"
     document.getElementById('loadMsg').style.visibility = "hidden"
@@ -587,8 +595,8 @@ async function generateFixtureData() {
     
     const fixtureDataAPI = await loadFixturesStatistics(fixtureID, team)
     const fixtureData = fixtureDataAPI["response"][0]["statistics"]
-    console.log(fixtureData)
     const statisticsList = document.getElementById('statistics')
+
     for (i in fixtureData) {
         const lstItem = document.createElement('li')
         if (`${fixtureData[i]["type"]}` == "expected_goals") {
