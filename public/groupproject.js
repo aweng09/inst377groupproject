@@ -565,6 +565,7 @@ async function generateData() {
 
     document.getElementById('loadMsg').style.visibility = "hidden"
 }
+
 async function generateFixtureData() {
 
     const usern = document.getElementById('profile').value
