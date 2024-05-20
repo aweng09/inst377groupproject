@@ -7,8 +7,11 @@
   <script type="text/javascript" src="groupproject.js" defer></script>
 
   <style>
-    div[data-simple-slider] { width:200px; height:200px; }
-</style>
+    div[data-simple-slider] {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
 </head>
 
 <body onload="populateFanMenus('2023'); accessFanData()">
@@ -64,21 +67,21 @@
       </form>
     </div>
   </div>
-  
+
   <h4 id="loadMsg" style="visibility: hidden;text-align: center">Please wait while we load your fanpage!</h4>
   <div class="content-container">
     <div class="first-container">
       <div class="imageContainer" id="playerImages" data-simple-slider>
-        <img class="image" id="slides0" src=""/>
-        <img class="image" id="slides1" src=""/>
-        <img class="image" id="slides2" src=""/>
-        <img class="image" id="slides3" src=""/>
-        <img class="image" id="slides4" src=""/>
-        <img class="image" id="slides5" src=""/>
-        <img class="image" id="slides6" src=""/>
-        <img class="image" id="slides7" src=""/>
-        <img class="image" id="slides8" src=""/>
-        <img class="image" id="slides9" src=""/>
+        <img class="image" id="slides0" src="" />
+        <img class="image" id="slides1" src="" />
+        <img class="image" id="slides2" src="" />
+        <img class="image" id="slides3" src="" />
+        <img class="image" id="slides4" src="" />
+        <img class="image" id="slides5" src="" />
+        <img class="image" id="slides6" src="" />
+        <img class="image" id="slides7" src="" />
+        <img class="image" id="slides8" src="" />
+        <img class="image" id="slides9" src="" />
       </div>
       <br><br>
       <div>
@@ -111,6 +114,19 @@
       </div>
     </div>
     <br><br>
+    <div class="fixtures-box">
+      <form onsubmit="generateFixtureData(); return false;">
+        <label for="fixture">Fixtures: </label>
+        <br>
+        <select name="fixture" id="fixtureMenu">
+          <option value="">--Please choose an option--</option>
+        </select>
+        <input type="submit" value="Lookup!">
+      </form>
+      <br><br>
+      <ol id="statistics">
+      </ol>
+    </div>
   </div>
 
 </body>

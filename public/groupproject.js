@@ -190,6 +190,18 @@ function loadFixtures(season) {
     return (fetch(url, options).then((res) => res.json()));
 }
 
+function loadFixturesStatistics(fixture, team) {
+    const url = `https://api-football-v1.p.rapidapi.com/v3/fixtures/statistics?fixture=${fixture}&team=${team}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '4a22194a81msh0f5b0d07d8e2f6cp198988jsnb1716b80fe43',
+            'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+        }
+    };
+    return (fetch(url, options).then((res) => res.json()));
+}
+
 async function getTeamIDs(name, season) {
     const teamIDsAPI = await loadTeamIDs(season)
     const teamIDs = teamIDsAPI["response"]
@@ -308,6 +320,18 @@ function loadPlayerStatistics(season, player) {
     return (fetch(url, options).then((res) => res.json()));
 }
 
+function loadFixtures(season, team) {
+    const url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?season=${season}&team=${team}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '4a22194a81msh0f5b0d07d8e2f6cp198988jsnb1716b80fe43',
+            'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+        }
+    };
+    return (fetch(url, options).then((res) => res.json()));
+}
+
 async function populateMenu(season) {
     const homeMenu = document.getElementById('home-team')
     const awayMenu = document.getElementById('away-team')
@@ -396,8 +420,6 @@ async function createFan() {
         })
     await accessFanData();
 }
-
-//New
 
 async function accessFan(user) {
     var fan_obj;
@@ -538,8 +560,44 @@ async function generateData() {
     row.appendChild(cell10)
     player_table.appendChild(row)
 
-    document.getElementById('player-table').style.visibility = "visible"
+    //Photo Slider
     document.getElementById('player-image').src = playerStats["player"]["photo"]
 
+    //Fixtures
+    const fixturesAPI = await loadFixtures(season, team)
+    const fixtures = fixturesAPI["response"]
+    const fixMenu = document.getElementById('fixtureMenu')
+
+    for (i in fixtures) {
+        const option = document.createElement('option')
+        option.value = `${fixtures[i]["fixture"]["id"]}`
+        option.innerHTML = `${fixtures[i]["teams"]["home"]["name"]} vs. ${fixtures[i]["teams"]["away"]["name"]}, ${fixtures[i]["fixture"]["date"]}`
+        fixMenu.appendChild(option)
+    }
+
+    document.getElementById('player-table').style.visibility = "visible"
     document.getElementById('loadMsg').style.visibility = "hidden"
+}
+
+async function generateFixtureData() {
+    const usern = document.getElementById('profile').value
+    const fan = await accessFan(usern)
+    const team = await getTeamIDs(fan["fav_team"], '2023')
+    const fixtureID = document.getElementById('fixtureMenu').value
+    
+    const fixtureDataAPI = await loadFixturesStatistics(fixtureID, team)
+    const fixtureData = fixtureDataAPI["response"][0]["statistics"]
+    console.log(fixtureData)
+    const statisticsList = document.getElementById('statistics')
+    for (i in fixtureData) {
+        const lstItem = document.createElement('li')
+        if (`${fixtureData[i]["type"]}` == "expected_goals") {
+            lstItem.innerHTML = `Expected Goals: ${fixtureData[i]["value"]}`
+        } else if (`${fixtureData[i]["value"]}` == "null") {
+            lstItem.innerHTML = `${fixtureData[i]["type"]}: N/A`
+        } else {
+            lstItem.innerHTML = `${fixtureData[i]["type"]}: ${fixtureData[i]["value"]}`
+        }
+        statisticsList.appendChild(lstItem)
+    }
 }

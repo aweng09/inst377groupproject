@@ -185,6 +185,16 @@ body {
   padding: 25px;
 }
 
+.fixtures-box {
+  display: flex;
+  flex-direction: column;
+  background-color: A1EEBD;
+  border-style: solid;
+  border-radius: 10px;
+  text-align: center;
+  padding: 15px;
+}
+
 .Match_Predictor_box {
   text-align: center;
   background-color: rgb(212, 154, 84);
