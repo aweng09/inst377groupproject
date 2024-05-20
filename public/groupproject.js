@@ -565,28 +565,3 @@ async function generateData() {
 
     document.getElementById('loadMsg').style.visibility = "hidden"
 }
-
-async function generateFixtureData() {
-
-    const usern = document.getElementById('profile').value
-    const fan = await accessFan(usern)
-    const team = await getTeamIDs(fan["fav_team"], '2023')
-    const fixtureID = document.getElementById('fixtureMenu').value
-    
-    const fixtureDataAPI = await loadFixturesStatistics(fixtureID, team)
-    const fixtureData = fixtureDataAPI["response"][0]["statistics"]
-    const statisticsList = document.getElementById('statistics')
-    statisticsList.innerHTML = ''
-
-    for (i in fixtureData) {
-        const lstItem = document.createElement('li')
-        if (`${fixtureData[i]["type"]}` == "expected_goals" || (`${fixtureData[i]["type"]}` == "expected_goals" && `${fixtureData[i]["value"]}` == "null")) {
-            lstItem.innerHTML = `Expected Goals: ${fixtureData[i]["value"]}`
-        } else if (`${fixtureData[i]["value"]}` == "null") {
-            lstItem.innerHTML = `${fixtureData[i]["type"]}: N/A`
-        } else {
-            lstItem.innerHTML = `${fixtureData[i]["type"]}: ${fixtureData[i]["value"]}`
-        }
-        statisticsList.appendChild(lstItem)
-    }
-}
